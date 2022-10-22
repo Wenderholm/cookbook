@@ -1,7 +1,7 @@
-#DANE DO MYSQL:
+**DANE DO MYSQL:**
 
-#TWORZENIE TABELI:
-
+**TWORZENIE TABELI:**
+```
 CREATE DATABASE cookbook DEFAULT CHARACTER SET utf8 COLLATE utf8_polish_ci;
 
 CREATE TABLE cookbook.recipe (
@@ -11,12 +11,13 @@ CREATE TABLE cookbook.recipe (
   ingredients VARCHAR(200) NOT NULL,
   description VARCHAR(1000) NOT NULL,
   PRIMARY KEY (id));
+  ```
   
-  UZUPELNIENIE TABELI W PRZYKLADOWE DANE:
-  
+  **UZUPELNIENIE TABELI W PRZYKLADOWE DANE:**
+  ```
   INSERT INTO
 	recipe (title, preptime, ingredients, description)
-VALUES
+   VALUES
 	('Jajecznica', 15, 'jajka, masło, szczypiorek, sól, pieprz',
     'Rozbij jajka do miseczki, a następnie lekko roztrzep widelcem, dodaj pieprz i sól. Pokrój drobno szczypiorek.
     W międzyczasie rozgrzej patelnię, a na niej masło. Wlej jajka i chwilę energicznie mieszaj. Gdy jajka się częściowo zetną, dorzuć szczypiorek,
@@ -27,3 +28,4 @@ VALUES
     Dorzuć kilka ziaren ziela angielskiego i trzy liście laurowe. Zagotuj, a następnie zmniejsz płomień do minimum i gotuj tak przez 3-6 godzin.
     Na koniec wyciągnij mięso i warzywa. Bulion możesz przecedzić przez sitko. Całość dopraw solą i pieprzem.'
     );
+```
