@@ -4,6 +4,7 @@ import java.util.Optional;
 public class RecipeDao {
     private final Connection connection;
 
+
     public RecipeDao(){
         try {
             this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/cookbook?serverTimezone=UTC", "root", "admin");
@@ -86,4 +87,23 @@ public class RecipeDao {
             throw new RuntimeException(e);
         }
     }
+
+
+
+    void showRecipes(){
+        final String sql = "SELECT title FROM recipe LIMIT 10";
+        try(Statement statement = connection.createStatement()){
+            ResultSet rs = statement.executeQuery(sql);
+            while(rs.next()){
+                String title = rs.getString("title");
+                System.out.printf("%s \n", title);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
 }

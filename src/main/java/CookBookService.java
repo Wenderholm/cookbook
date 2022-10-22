@@ -21,13 +21,13 @@ public class CookBookService {
                     create();
                     break;
                 case DELETE_RECIPE:
-//                    addMagazine();
+                    delete();
                     break;
                 case UPDATE_RECIPE:
-//                    printBooks();
+//                    update();
                     break;
                 case PRINT_RECIPE:
-//                    printMagazines();
+                    showRecipes();
                     break;
                 case FIND_RECIPE:
                     read();
@@ -118,6 +118,7 @@ public class CookBookService {
         System.out.println("Zapisuję przepis na: " + title);
         DAO.save(recipe);
         System.out.println("Przepis zapisany, jego id to: " + recipe.getId());
+        System.out.println("--------------------------------------------------------");
     }
 
     public void read() {
@@ -127,27 +128,37 @@ public class CookBookService {
                 recipe -> System.out.println("Szukany przepis:\n" + recipe),
                 () -> System.out.println("Brak przepisu o takiej nazwie")
         );
+        System.out.println("--------------------------------------------------------");
     }
 
-    private static void update() {
-        Function<Recipe, Recipe> updateRecipePrepTime = recipe -> {
-            recipe.setPrepTime(60);
-            return recipe;
-        };
-        DAO.findByTitle("Kurczak z frytkami")
-                .map(updateRecipePrepTime)
-                .map(recipe -> DAO.update(recipe))
-                .filter(b -> b)
-                .ifPresent(updated -> System.out.println("Czas przygotowania został zaktualizowany"));
-    }
+//    private static void update() {
+//        Function<Recipe, Recipe> updateRecipePrepTime = recipe -> {
+//            recipe.setPrepTime(90);
+//            return recipe;
+//        };
+//        DAO.findByTitle(title)
+//                .map(updateRecipePrepTime)
+//                .map(recipe -> DAO.update(recipe))
+//                .filter(b -> b)
+//                .ifPresent(updated -> System.out.println("dane zostaly zaktualizowane w przepisie: " + title));
+//    }
 
-    private static void delete() {
-        System.out.println("Usuwam przepis na rosół");
-        DAO.findByTitle("Rosół")
+    public void delete() {
+        System.out.println("podaj dokladna nazwe przepisu do usunięcia: ");
+        String title = sc.nextLine();
+        System.out.println("Usuwam przepis: " + title);
+        DAO.findByTitle(title)
                 .map(recipe -> recipe.getId())
                 .map(id -> DAO.delete(id))
                 .ifPresentOrElse(removed -> System.out.println("Przepis został usunięty"),
                         () -> System.out.println("W bazie nie ma przepisu do usunięcia"));
+        System.out.println("--------------------------------------------------------");
+    }
+
+    public void showRecipes(){
+        System.out.println("Przepisy znajdujace sie w naszej ksiazce: ");
+        DAO.showRecipes();
+        System.out.println("--------------------------------------------------------");
     }
 
 
