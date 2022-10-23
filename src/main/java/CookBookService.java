@@ -24,7 +24,7 @@ public class CookBookService {
                     delete();
                     break;
                 case UPDATE_RECIPE:
-//                    update();
+                    update();
                     break;
                 case PRINT_RECIPE:
                     showRecipes();
@@ -131,17 +131,31 @@ public class CookBookService {
         System.out.println("--------------------------------------------------------");
     }
 
-//    private static void update() {
-//        Function<Recipe, Recipe> updateRecipePrepTime = recipe -> {
-//            recipe.setPrepTime(90);
-//            return recipe;
-//        };
-//        DAO.findByTitle(title)
-//                .map(updateRecipePrepTime)
-//                .map(recipe -> DAO.update(recipe))
-//                .filter(b -> b)
-//                .ifPresent(updated -> System.out.println("dane zostaly zaktualizowane w przepisie: " + title));
-//    }
+    public void update() {
+        System.out.println("podaj nazwę przepisu do zmiany: ");
+        String titleSearch = sc.nextLine();
+        System.out.println("podaj nazwę przepisu: ");
+        String title = sc.nextLine();
+        System.out.println("dodaj opis przepisu: ");
+        String description = sc.nextLine();
+        System.out.println("dodaj składniki: ");
+        String ingredients = sc.nextLine();
+        System.out.println("podaj czas przygotowania: ");
+        int prepTime = getInt();
+
+        Function<Recipe, Recipe> updateRecipePrepTime = recipe -> {
+            recipe.setTitle(title);
+            recipe.setDescription(description);
+            recipe.setIngredients(ingredients);
+            recipe.setPrepTime(prepTime);
+            return recipe;
+        };
+        DAO.findByTitle(titleSearch)
+                .map(updateRecipePrepTime)
+                .map(recipe -> DAO.update(recipe))
+                .filter(b -> b)
+                .ifPresent(updated -> System.out.println("dane zostaly zaktualizowane w przepisie: " + title));
+    }
 
     public void delete() {
         System.out.println("podaj dokladna nazwe przepisu do usunięcia: ");
